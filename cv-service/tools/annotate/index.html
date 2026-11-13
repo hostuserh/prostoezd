@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParkVision — редактор разметки ROI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="topbar">
+  <span class="brand">ParkVision<span class="brand-sub">разметка ROI</span></span>
+
+  <label class="field">Камера
+    <select id="cameraSelect"></select>
+  </label>
+
+  <label class="field">Кадр
+    <select id="frameSelect"><option value="">— нет —</option></select>
+  </label>
+  <button id="btnReloadFrames" class="ghost" title="Перечитать список кадров с сервера">⟳</button>
+  <label class="ghost filebtn" title="Открыть картинку с диска">
+    файл… <input type="file" id="fileImage" accept="image/*" hidden>
+  </label>
+
+  <span class="sep"></span>
+
+  <div id="modes" class="modes">
+    <button data-mode="select" class="active" title="V — выделение, перетаскивание вершин">выделение</button>
+    <button data-mode="spot" title="S — место: 4 клика по углам наземного следа">место</button>
+    <button data-mode="zone" title="Z — зона: N кликов, двойной клик замыкает">зона</button>
+    <button data-mode="overlay" title="O — прямоугольник оверлея (таймкод, вотермарка)">overlay</button>
+    <button data-mode="tile" title="T — тайл детектора">tile</button>
+  </div>
+
+  <span class="sep"></span>
+
+  <span class="zoom">
+    <button id="btnZoomOut" class="ghost">−</button>
+    <span id="zoomLabel">100%</span>
+    <button id="btnZoomIn" class="ghost">+</button>
+    <button id="btnZoomFit" class="ghost" title="F — вписать кадр">вписать</button>
+  </span>
+
+  <span class="spacer"></span>
+  <span id="status" class="status"></span>
+</header>
+
+<div id="main">
+  <div id="stage">
+    <canvas id="canvas"></canvas>
+    <div id="hud"></div>
+    <div id="hint" class="hint"></div>
+  </div>
+
+  <aside id="side">
+
+    <section id="warnCam" class="banner hidden"></section>
+
+    <section class="panel">
+      <h2>Объекты
+        <span class="counts" id="counts"></span>
+      </h2>
+      <div class="idtpl">
+        <label>Шаблон id мест <input type="text" id="spotTpl" value="S-3" size="6"></label>
+        <label>след. <input type="text" id="spotNext" value="01" inputmode="numeric" size="4"
+                           title="Ведущие нули сохраняются: S-3 + 01 = S-301"></label>
+      </div>
+      <div class="idtpl">
+        <label>Шаблон id зон <input type="text" id="zoneTpl" value="Z-3" size="6"></label>
+        <label>след. <input type="text" id="zoneNext" value="01" inputmode="numeric" size="4"></label>
+      </div>
+      <ul id="objList" class="objlist"></ul>
+    </section>
+
+    <section class="panel" id="propsPanel">
+      <h2>Свойства</h2>
+      <div id="props"><p class="muted">Ничего не выделено.</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Конфиг</h2>
+      <div class="btnrow">
+        <button id="btnLoadServer">Загрузить с сервера</button>
+        <label class="filebtn btn">Импорт YAML…<input type="file" id="fileYaml" accept=".yml,.yaml,text/yaml" hidden></label>
+      </div>
+      <div class="btnrow">
+        <button id="btnValidate">Проверить</button>
+        <button id="btnExport">Скачать YAML</button>
+        <button id="btnSave" class="primary">Сохранить на сервер</button>
+      </div>
+      <div id="problems" class="problems hidden"></div>
+      <details id="previewBox">
+        <summary>YAML-превью</summary>
+        <textarea id="yamlPreview" spellcheck="false" readonly></textarea>
+      </details>
+    </section>
+
+    <section class="panel">
+      <h2>Горячие клавиши</h2>
+      <ul class="keys">
+        <li><kbd>V</kbd>/<kbd>S</kbd>/<kbd>Z</kbd>/<kbd>O</kbd>/<kbd>T</kbd> — режимы</li>
+        <li><kbd>колесо</kbd> — зум к курсору</li>
+        <li><kbd>перетаскивание</kbd> фона или <kbd>Space</kbd>+drag — панорама</li>
+        <li><kbd>Enter</kbd> — замкнуть зону, <kbd>Esc</kbd> — отменить</li>
+        <li><kbd>Del</kbd> — удалить выделенное</li>
+        <li><kbd>D</kbd> — дублировать место со сдвигом</li>
+        <li><kbd>F</kbd> — вписать кадр</li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<script src="yaml.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

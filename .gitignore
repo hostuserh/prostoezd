@@ -1,0 +1,15 @@
+# Архив кадров: камеры публичные, но кадры содержат читаемые номера и лица.
+# Наружу уходят только агрегированные статусы.
+cv-service/frames/
+cv-service/buffer.db
+cv-service/models/*.onnx
+
+# Мусор от onnx shape inference в tools/export_model.py:
+# временный граф и выгруженные во внешний файл веса (имя — UUID).
+cv-service/sym_shape_infer_temp.onnx
+cv-service/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]-*-*-*-*
+
+__pycache__/
+*.pyc
+.venv*/
+.pytest_cache/
