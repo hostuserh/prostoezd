@@ -86,6 +86,11 @@ class Zone:
     lat: float
     lon: float
     entrance: GeoPoint
+    # Как и у места: выключенную зону оставляем в конфиге, но статусы по ней
+    # не считаем и на backend не шлём. Нужно для участков, которые размечены,
+    # но пока не годятся — например машины 25-45 px на CAM-002.
+    enabled: bool = True
+    notes: str = ""
 
     @property
     def bbox(self) -> tuple[float, float, float, float]:
@@ -322,6 +327,8 @@ def _parse_zone(
         lat=lat,
         lon=lon,
         entrance=entrance,
+        enabled=bool(raw.get("enabled", True)),
+        notes=str(raw.get("notes", "")),
     )
 
 
@@ -383,8 +390,14 @@ def _parse_camera(
         if parsed_z:
             zones.append(parsed_z)
 
-    if require_rois and not spots and not zones:
-        problems.append(f"{cam_id}: нет ни одного места и ни одной зоны")
+    # Считаем только включённые: камера, где всё выключено, для детектора
+    # бесполезна ровно так же, как камера без разметки вообще.
+    if require_rois and not any(s.enabled for s in spots) and not any(
+        z.enabled for z in zones
+    ):
+        problems.append(
+            f"{cam_id}: нет ни одного включённого места и ни одной включённой зоны"
+        )
 
     return Camera(
         id=cam_id,

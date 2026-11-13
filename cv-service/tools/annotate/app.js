@@ -32,7 +32,7 @@
       'reference_frame', 'poll_interval_s', 'range_bytes', 'footprint_offset_px',
       'overlay_exclude', 'tiles', 'spots', 'zones'],
     '.cameras[].spots[]': ['id', 'type', 'enabled', 'quad', 'lat', 'lon', 'approach', 'notes'],
-    '.cameras[].zones[]': ['id', 'name', 'capacity', 'polygon', 'lat', 'lon', 'entrance', 'notes'],
+    '.cameras[].zones[]': ['id', 'name', 'capacity', 'enabled', 'polygon', 'lat', 'lon', 'entrance', 'notes'],
     '.cameras[].spots[].approach': ['lat', 'lon'],
     '.cameras[].zones[].entrance': ['lat', 'lon']
   };
@@ -823,8 +823,9 @@
       group('Зоны');
       c.zones.forEach(function (z, i) {
         var bad = typeof z.lat !== 'number' || !(z.capacity > 0);
-        row('zone', i, COLORS.zone, z.id || '(без id)',
-          (z.polygon || []).length + ' точек · cap ' + (z.capacity != null ? z.capacity : '—'), bad, false);
+        row('zone', i, z.enabled === false ? COLORS.spotOff : COLORS.zone, z.id || '(без id)',
+          (z.polygon || []).length + ' точек · cap ' + (z.capacity != null ? z.capacity : '—'),
+          bad, z.enabled === false);
       });
     }
     if ((c.overlay_exclude || []).length) {
@@ -950,6 +951,8 @@
       box.appendChild(field('id', z.id, function (v) { z.id = v; refresh(); }));
       box.appendChild(field('name', z.name || '', function (v) { z.name = v; refresh(); }));
       box.appendChild(field('capacity', z.capacity, function (v) { z.capacity = v === null ? null : Math.round(v); refresh(); }, { number: true, step: '1' }));
+      box.appendChild(field('enabled', z.enabled !== false, function (v) { z.enabled = v; refresh(); },
+        { checkbox: true }));
       box.appendChild(field('lat', z.lat, function (v) { z.lat = v; refresh(); }, { number: true, step: '0.000001' }));
       box.appendChild(field('lon', z.lon, function (v) { z.lon = v; refresh(); }, { number: true, step: '0.000001' }));
       var sub2 = document.createElement('div');
@@ -958,6 +961,9 @@
       z.entrance = z.entrance || { lat: null, lon: null };
       box.appendChild(field('entrance.lat', z.entrance.lat, function (v) { z.entrance.lat = v; refresh(); }, { number: true, step: '0.000001' }));
       box.appendChild(field('entrance.lon', z.entrance.lon, function (v) { z.entrance.lon = v; refresh(); }, { number: true, step: '0.000001' }));
+      // notes переживает round-trip через редактор, а комментарии YAML — нет.
+      // Пометки про черновик держим здесь.
+      box.appendChild(field('notes', z.notes || '', function (v) { if (v) z.notes = v; else delete z.notes; refresh(); }));
       var p = document.createElement('p');
       p.className = 'muted';
       p.textContent = 'Точек: ' + (z.polygon || []).length + ' · площадь ' +

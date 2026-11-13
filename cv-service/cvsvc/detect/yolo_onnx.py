@@ -168,7 +168,12 @@ def decode_yolo_output(
     out = np.asarray(output)
     if out.ndim == 3:
         out = out[0]
-    if out.shape[0] < out.shape[1]:  # (84, 8400) -> (8400, 84)
+    # Приводим к (anchors, channels). Каналов всегда >= 5 (4 координаты + классы),
+    # якорей у реальной модели 8400 — но в тестах их бывает два, поэтому
+    # «меньшая ось = каналы» было бы неверным правилом.
+    if out.shape[1] < 5 <= out.shape[0]:  # (84, 2) -> (2, 84)
+        out = out.T
+    elif 5 <= out.shape[0] < out.shape[1]:  # (84, 8400) -> (8400, 84)
         out = out.T
     if out.shape[1] < 5:
         raise ValueError(f"неожиданная форма выхода модели: {output.shape}")
