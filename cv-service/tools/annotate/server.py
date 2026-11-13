@@ -251,9 +251,9 @@ class Handler(SimpleHTTPRequestHandler):
         try:
             backup = backup_config()
             CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
-            tmp = CONFIG_PATH.with_suffix(".yml.tmp")
+            tmp = CONFIG_PATH.parent / (CONFIG_PATH.name + ".tmp")
             tmp.write_text(text, encoding="utf-8")
-            tmp.replace(CONFIG_PATH)
+            tmp.replace(CONFIG_PATH)  # атомарная подмена в пределах одной ФС
         except OSError as exc:
             self._json(HTTPStatus.INTERNAL_SERVER_ERROR,
                        {"ok": False, "message": f"не смог записать: {exc}", "problems": []})
