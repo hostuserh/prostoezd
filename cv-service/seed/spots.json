@@ -1,0 +1,208 @@
+{
+  "generated_at": "2026-11-13T14:11:42+10:00",
+  "source": "config/cameras.yml",
+  "note": "Черновая разметка. Пиксельные ROI заданы в системе эталонного кадра камеры — см. roi_frame_size. Статусы unknown до первой детекции CV.",
+  "count": 10,
+  "spots": [
+    {
+      "id": "S-301",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.1772,
+      "longitude": 131.9668,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1505, 1030],
+        [1519, 934],
+        [1595, 928],
+        [1581, 1024]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-302",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177192,
+      "longitude": 131.966827,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1581, 1024],
+        [1595, 928],
+        [1670, 923],
+        [1656, 1019]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-303",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177183,
+      "longitude": 131.966853,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1656, 1019],
+        [1670, 923],
+        [1746, 918],
+        [1732, 1014]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-304",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177175,
+      "longitude": 131.96688,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1732, 1014],
+        [1746, 918],
+        [1821, 915],
+        [1807, 1011]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-305",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177167,
+      "longitude": 131.966907,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1807, 1011],
+        [1821, 915],
+        [1897, 913],
+        [1883, 1009]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-306",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177158,
+      "longitude": 131.966933,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1883, 1009],
+        [1897, 913],
+        [1972, 913],
+        [1958, 1009]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-307",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.17715,
+      "longitude": 131.96696,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [1958, 1009],
+        [1972, 913],
+        [2048, 914],
+        [2034, 1010]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-308",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177142,
+      "longitude": 131.966987,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [2034, 1010],
+        [2048, 914],
+        [2123, 917],
+        [2109, 1013]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-309",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177133,
+      "longitude": 131.967013,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [2109, 1013],
+        [2123, 917],
+        [2199, 922],
+        [2185, 1018]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "S-310",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "latitude": 43.177125,
+      "longitude": 131.96704,
+      "approach_lat": 43.17706,
+      "approach_lon": 131.96672,
+      "roi_polygon": [
+        [2185, 1018],
+        [2199, 922],
+        [2274, 928],
+        [2260, 1024]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "spot_type": "standard",
+      "status": "unknown",
+      "confidence": 0.0,
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    }
+  ]
+}

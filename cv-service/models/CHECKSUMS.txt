@@ -1,10 +1,12 @@
 # ParkVision — контрольные суммы моделей детектора.
 # Сами .onnx в .gitignore. Этот файл — чтобы у всех была одна модель.
 # Пересоздать: python tools/export_model.py
-# Сгенерировано: 2026-11-13T13:54:45+1000
+# Сгенерировано: 2026-11-13T14:10:57+1000
 # модель: yolov8n.pt, imgsz=640, opset=13, dynamic batch
 # калибровка: 200 тайлов 640x640 из наших кадров (не COCO)
 # голова детекции (/model.22/) оставлена в fp32: полная int8-квантизация обнуляет скоры классов
 
-4e1f45cb8a7047066f32d81d46ad15c70f5c6967a9c9d4e30aef4bffa5691a49  yolov8n-int8.onnx
-14dba357e9afa669469fda6650d231e53fd2958bd534003d879ed8e057b089ab  yolov8n.onnx
+bb11111d504b2b1b737637c780c328ed0af9d190304989f2a3d1e93a871267a7  yolov8n-int8.onnx
+916b7e639e23a5081ee665277cc92707ca0a27027b3f80b138b1cac32bea8a69  yolov8n.onnx
+8fe9060ba11d8b9c30b95803b13e0ff083a07f6c846f39d2579b8fa557cd647f  yolov8s-int8.onnx
+a4bddb543851680e66e6df470d1e869fc2bd76954ef8b175e072db814062be44  yolov8s.onnx

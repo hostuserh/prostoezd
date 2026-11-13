@@ -363,7 +363,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  готово: {int8_path} ({int8_path.stat().st_size / 1e6:.1f} МБ)")
         entries[int8_path.name] = sha256(int8_path)
 
-    write_checksums(entries, notes)
+    # Суммы других моделей (например yolov8n рядом с yolov8s) не затираем:
+    # иначе --skip-if-exists после экспорта второй модели решит, что первой нет.
+    merged = {**read_checksums(), **entries}
+    for name in list(merged):
+        if not (MODELS_DIR / name).exists():
+            del merged[name]
+    write_checksums(merged, notes)
     print(f"\nконтрольные суммы записаны в {CHECKSUMS}")
     for name, digest in sorted(entries.items()):
         print(f"  {digest}  {name}")

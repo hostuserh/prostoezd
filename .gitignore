@@ -2,7 +2,13 @@
 # Наружу уходят только агрегированные статусы.
 cv-service/frames/
 cv-service/buffer.db
+# Веса моделей — артефакты сборки: качаются и экспортируются
+# tools/export_model.py, контрольные суммы лежат в models/CHECKSUMS.txt.
 cv-service/models/*.onnx
+cv-service/models/*.pt
+
+# Бэкапы cameras.yml, которые редактор разметки делает при каждом сохранении.
+cv-service/config/backups/
 
 # Мусор от onnx shape inference в tools/export_model.py:
 # временный граф и выгруженные во внешний файл веса (имя — UUID).

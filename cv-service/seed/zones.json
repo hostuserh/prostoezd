@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-11-13T14:11:42+10:00",
+  "source": "config/cameras.yml",
+  "note": "Черновая разметка. Пиксельные ROI заданы в системе эталонного кадра камеры — см. roi_frame_size. Статусы unknown до первой детекции CV.",
+  "count": 5,
+  "zones": [
+    {
+      "id": "Z-101",
+      "parking_lot_id": "P-001",
+      "camera_id": "CAM-001",
+      "name": "Карман у кольца Багратиона",
+      "capacity": 30,
+      "latitude": 43.1497,
+      "longitude": 131.931,
+      "entrance_lat": 43.14945,
+      "entrance_lon": 131.9314,
+      "roi_polygon": [
+        [0, 560],
+        [240, 530],
+        [700, 950],
+        [690, 1015],
+        [560, 1035],
+        [60, 765],
+        [0, 650]
+      ],
+      "roi_frame_size": [1920, 1080],
+      "free_count": null,
+      "occupied_count": null,
+      "status": "unknown",
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "Z-102",
+      "parking_lot_id": "P-001",
+      "camera_id": "CAM-001",
+      "name": "Полоса вдоль дороги, Багратиона",
+      "capacity": 12,
+      "latitude": 43.1501,
+      "longitude": 131.9304,
+      "entrance_lat": 43.1499,
+      "entrance_lon": 131.9308,
+      "roi_polygon": [
+        [170, 390],
+        [600, 405],
+        [605, 485],
+        [175, 470]
+      ],
+      "roi_frame_size": [1920, 1080],
+      "free_count": null,
+      "occupied_count": null,
+      "status": "unknown",
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "Z-201",
+      "parking_lot_id": "P-002",
+      "camera_id": "CAM-002",
+      "name": "Стоянка вдоль улицы у ТЦ",
+      "capacity": 18,
+      "latitude": 43.1148,
+      "longitude": 131.8893,
+      "entrance_lat": 43.1146,
+      "entrance_lon": 131.8896,
+      "roi_polygon": [
+        [1130, 500],
+        [1250, 512],
+        [1125, 715],
+        [1005, 695]
+      ],
+      "roi_frame_size": [1920, 1080],
+      "free_count": null,
+      "occupied_count": null,
+      "status": "unknown",
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "Z-202",
+      "parking_lot_id": "P-002",
+      "camera_id": "CAM-002",
+      "name": "Дальняя полоса вдоль дороги",
+      "capacity": 14,
+      "latitude": 43.1153,
+      "longitude": 131.8901,
+      "entrance_lat": 43.1151,
+      "entrance_lon": 131.8904,
+      "roi_polygon": [
+        [1395, 420],
+        [1740, 428],
+        [1745, 472],
+        [1395, 464]
+      ],
+      "roi_frame_size": [1920, 1080],
+      "free_count": null,
+      "occupied_count": null,
+      "status": "unknown",
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    },
+    {
+      "id": "Z-301",
+      "parking_lot_id": "P-003",
+      "camera_id": "CAM-003",
+      "name": "Грунтовая площадка слева от ТЦ",
+      "capacity": 45,
+      "latitude": 43.1776,
+      "longitude": 131.9659,
+      "entrance_lat": 43.1774,
+      "entrance_lon": 131.9663,
+      "roi_polygon": [
+        [300, 700],
+        [700, 585],
+        [900, 640],
+        [880, 760],
+        [560, 900],
+        [330, 835]
+      ],
+      "roi_frame_size": [2592, 1944],
+      "free_count": null,
+      "occupied_count": null,
+      "status": "unknown",
+      "updated_at": "2026-11-13T14:11:42+10:00"
+    }
+  ]
+}

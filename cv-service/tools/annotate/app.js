@@ -67,6 +67,7 @@
     sel: null,            // {kind, i, v}
     drag: null,
     space: false,
+    fitted: false,
     hasServer: false
   };
 
@@ -153,14 +154,17 @@
     return [e.clientX - r.left, e.clientY - r.top];
   }
 
+  // Если редактор отрисовался в ещё не разложенном контейнере (ширина 0),
+  // вписать нечего — запоминаем это и доделаем на первом же resize.
   function fitView() {
     var fs = frameSize();
     var w = canvas.clientWidth, h = canvas.clientHeight;
-    if (!w || !h) return;
+    if (!w || !h) { S.fitted = false; return; }
     var s = Math.min(w / fs[0], h / fs[1]) * 0.96;
     S.view.scale = s;
     S.view.x = (w - fs[0] * s) / 2;
     S.view.y = (h - fs[1] * s) / 2;
+    S.fitted = true;
     draw();
   }
 
@@ -190,6 +194,7 @@
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!S.fitted && w && h) { fitView(); return; }
     draw();
   }
 
@@ -664,11 +669,15 @@
     if (d.type === 'vertex' || d.type === 'move') { refresh(); }
   });
 
+  // Замыкание зоны двойным кликом.
+  //
+  // Точку-дубль от второго клика НЕ вычищаем здесь: сколько mouseup прилетит
+  // перед dblclick — один или два — зависит от того, настоящая это мышь или
+  // синтетика, и угадывать бессмысленно. Дубль гасится в addPendingPoint,
+  // так что к этому моменту лишней точки уже нет.
   canvas.addEventListener('dblclick', function (e) {
-    if (S.mode !== 'zone' || !S.pending) return;
+    if (S.mode !== 'zone' || !S.pending || !S.pending.pts.length) return;
     e.preventDefault();
-    // двойной клик успел добавить лишнюю точку — убираем её
-    S.pending.pts.pop();
     closeZone();
   });
 
@@ -679,6 +688,11 @@
     if (ip[0] < 0 || ip[1] < 0 || ip[0] > fs[0] || ip[1] > fs[1]) return;
     if (S.mode !== 'spot' && S.mode !== 'zone') return;
     if (!S.pending || S.pending.kind !== S.mode) S.pending = { kind: S.mode, pts: [] };
+    // Второй клик двойного клика приходит сюда как обычная точка поверх
+    // предыдущей. Гасим её здесь: иначе зона получает вырожденное ребро,
+    // а место — две совпавшие вершины.
+    var prev = S.pending.pts[S.pending.pts.length - 1];
+    if (prev && dist(ip, prev) * S.view.scale < 5) return;
     S.pending.pts.push([ip[0], ip[1]]);
     if (S.mode === 'spot' && S.pending.pts.length === 4) {
       var pts = S.pending.pts;
@@ -1084,7 +1098,7 @@
       } else {
         setStatus(path + ' · ' + img.naturalWidth + '×' + img.naturalHeight, 'ok');
       }
-      draw();
+      if (!S.fitted) fitView(); else draw();
     };
     img.onerror = function () {
       S.img = null;
